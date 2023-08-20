@@ -7,7 +7,7 @@ before_install:
   - py -3.10 -m ensurepip                                       # Install pip
   - py -3.10 -m pip install --upgrade pip
   - py -3.10 -m pip install picomc requests pyinstaller
-
+  - export PATH="/c/Python310/Scripts:$PATH"
 # Use pyinstaller to build the executable
 script:
   - pyinstaller --onefile ----windowed  --name=oneclick-launcher ./Client/main.py
