@@ -1,0 +1,14 @@
+{
+    "eshark": {
+        "CanPlayMC": "true",
+        "MinecraftUUID": "1f572faa-cc43-4ec1-9b38-1eae091fec42",
+        "MinecraftClientToken": "a082d9e6-886a-48e4-9937-18050fea58ce",
+        "MinecraftUsername": "asd"
+    },
+    "Thoma": {
+        "CanPlayMC": "true",
+        "MinecraftUUID": "2f572faa-cc43-4ec1-9b38-1eae091fec42",
+        "MinecraftClientToken": "b082d9e6-886a-48e4-9937-18050fea58ce",
+        "MinecraftUsername": "ThomasMCusername"
+    }
+}
