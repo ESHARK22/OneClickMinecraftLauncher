@@ -3,7 +3,9 @@ language: c
 # Install python 3.10.11
 before_install:
   - choco install python --version 3.10.11
-  - python -m ensurepip --upgrade
+
+  - curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py # Install pip 
+  - python get-pip.py                                       # Install pip
   - python -m pip install --upgrade pip
   - python -m pip install picomc zipfile requests pyinstaller
 
