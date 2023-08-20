@@ -10,4 +10,4 @@ before_install:
   - export PATH="/c/Python310/Scripts:$PATH"
 # Use pyinstaller to build the executable
 script:
-  - pyinstaller --onefile ----windowed  --name=oneclick-launcher ./Client/main.py
+  - pyinstaller --onefile --windowed  --name=oneclick-launcher ./Client/main.py
