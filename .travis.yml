@@ -6,7 +6,7 @@ before_install:
 
   - py -3.10 -m ensurepip                                       # Install pip
   - py -3.10 -m pip install --upgrade pip
-  - py -3.10 -m pip install picomc zipfile requests pyinstaller
+  - py -3.10 -m pip install picomc requests pyinstaller
 
 # Use pyinstaller to build the executable
 script:
