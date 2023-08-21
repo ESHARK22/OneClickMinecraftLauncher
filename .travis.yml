@@ -1,23 +1,40 @@
-os: windows
+os: 
+  - linux
+  - windows
+
 language: c
 
+# Install python3 on windows and linux
 before_install:
-  - choco install python --version 3.10.11
-  - py -3.10 -m ensurepip
-  - py -3.10 -m pip install --upgrade pip
-  - py -3.10 -m pip install picomc requests pyinstaller
-  - export PATH="/c/Python310/Scripts:$PATH"
-  
+  - echo $TRAVIS_OS_NAME
+  - >-
+      case $TRAVIS_OS_NAME in 
+        windows)
+          choco install python --version 3.10.11
+          ;;
+        linux)
+          sudo apt install python3
+          ;;
+      esac
+
+# Install python dependencies
+install:
+  - python3 -m pip install picomc requests pyinstaller
+
 # Use pyinstaller to build the executable
 script:
   - pyinstaller --onefile --windowed  --name=oneclick-launcher ./Client/main.py
-  
+
+# Setup the tag for the release
 before_deploy:
   # Set up git user name and tag this commit
   - git config --local user.name "ESHARK22"
   - git config --local user.email "admin@eshark.tk"
   - export TRAVIS_TAG=${TRAVIS_TAG:-$(date +'%Y-%m-%d_%H:%M:%S')_$(git log --format=%h -1)}
   - git tag $TRAVIS_TAG
+
+
+# Upload to github releases
 deploy:
   provider: releases
   api_key:
