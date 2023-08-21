@@ -11,19 +11,25 @@ before_install:
       case $TRAVIS_OS_NAME in 
         windows)
           choco install python --version 3.10.11
+          export python="C:\\Python310\\python.exe"
           ;;
         linux)
-          sudo apt install python3
+          sudo apt install python3 curl
+          export python="python3"
           ;;
       esac
 
+  - curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py
+
 # Install python dependencies
 install:
-  - python3 -m pip install picomc requests pyinstaller
+  - $python get-pip.py
+  - $python -m pip install --upgrade pip
+  - $python -m pip install picomc requests pyinstaller
 
 # Use pyinstaller to build the executable
 script:
-  - pyinstaller --onefile --windowed  --name=oneclick-launcher ./Client/main.py
+  - $python -m pyinstaller --onefile --windowed  --name=oneclick-launcher ./Client/main.py
 
 # Setup the tag for the release
 before_deploy:
