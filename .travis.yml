@@ -12,10 +12,12 @@ before_install:
         windows)
           choco install python --version 3.10.11
           export python="C:\\Python310\\python.exe"
+          export pyinstaller="C:\\Python310\\Scripts\\pyinstaller.exe"
           ;;
         linux)
           sudo apt install python3 curl
           export python="python3"
+          export pyinstaller="pyinstaller"
           ;;
       esac
 
@@ -29,7 +31,7 @@ install:
 
 # Use pyinstaller to build the executable
 script:
-  - $python -m pyinstaller --onefile --windowed  --name=oneclick-launcher ./Client/main.py
+  - $pyinstaller --onefile --windowed  --name=oneclick-launcher ./Client/main.py
 
 # Setup the tag for the release
 before_deploy:
