@@ -35,22 +35,25 @@ def check_internet():
         print("Internet Connection: Failed")
         print(e)
         sys.exit(1)
+        
+def picomc(args):
+    args = args.split(" ")
+    args.insert(0, "picomc")
+    args.insert(1, "--root")
+    args.insert(2, "./MinecraftFiles")
+    with set_argv(args):
+        from picomc import main
+        main()
 
 def create_mc_instance():
-    with set_argv(["picomc", "--root", "./MinecraftFiles","instance", "create", "default"]):
-        from picomc import main
-        main()
+    picomc("instance create default")
 
 def set_java_path(java_path):
-    with open("./MinecraftFiles/instances/default/config.json", "r") as f:
-        config = json.load(f)
-    config["java_path"] = java_path
-    with open("./MinecraftFiles/instances/default/config.json", "w") as f:
-        f.write(json.dumps(config, indent=4))
+    picomc("config set java.path " + java_path)
+    picomc("instance default config set java.path " + java_path)
+
 def launch_mc():
-    with set_argv(["picomc", "--root", "./MinecraftFiles","instance", "launch", "default"]):
-        from picomc import main
-        main()
+    picomc("instance launch default")
 
 def write_account_config(username, uuid, client_token):
     config = {
@@ -69,7 +72,7 @@ def write_account_config(username, uuid, client_token):
 
 #######################################################################
 SERVER_URL = "https://testmc.eshark.tk/"
-java_path = os.path.abspath("./java/jdk-17.0.8+7/bin/java.exe")
+java_path = "./java/jdk-17.0.8+7/bin/java.exe"
 current_user = os.getlogin()
 
 
@@ -100,7 +103,6 @@ try:
     create_mc_instance()
 except:
     pass
-
 user_data = requests.get(SERVER_URL + f"/McUser?username={current_user}")
 if user_data.status_code == 200:
     user_data = user_data.json()
@@ -110,7 +112,11 @@ else:
     print("Error: " + str(user_data.status_code))
     sys.exit(1)
 
-set_java_path(java_path)
+try:
+    set_java_path(java_path)
+except:
+    pass
+
 launch_mc()
 
 

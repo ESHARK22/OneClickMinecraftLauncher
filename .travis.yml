@@ -17,7 +17,8 @@ before_install:
         linux)
           sudo apt install python3 curl
           export python="python3"
-          export pyinstaller="pyinstaller"
+          export python_path = $(which python3)
+          export pyinstaller=$pyhton_path"/Scripts/pyinstaller.exe"
           ;;
       esac
 
