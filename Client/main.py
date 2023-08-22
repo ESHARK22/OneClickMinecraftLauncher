@@ -105,6 +105,7 @@ user_data = requests.get(SERVER_URL + f"/McUser?username={current_user}")
 if user_data.status_code == 200:
     user_data = user_data.json()
     if user_data["CanPlayMC"]:
+        print("You are authorized to play minecraft!")
         write_account_config(user_data["MinecraftUsername"], user_data["MinecraftUUID"], user_data["MinecraftClientToken"])
 else:
     print("Error: " + str(user_data.status_code))

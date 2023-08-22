@@ -1,0 +1,10 @@
+{
+    "default": "RiskyINIT",
+    "accounts": {
+        "ThomasMCusername": {
+            "uuid": "2f572faa-cc43-4ec1-9b38-1eae091fec42",
+            "online": false
+        }
+    },
+    "client_token": "b082d9e6-886a-48e4-9937-18050fea58ce"
+}
