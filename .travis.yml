@@ -57,7 +57,7 @@ deploy:
     file:
       - dist/oneclick-launcher.exe
     skip_cleanup: true
-    draft: true
+    draft: false
     prerelease: true
 
     on:
@@ -74,7 +74,7 @@ deploy:
     file:
       - dist/oneclick-launcher
     skip_cleanup: true
-    draft: true
+    draft: false
     prerelease: true
     on:
       condition: $TRAVIS_OS_NAME = linux
