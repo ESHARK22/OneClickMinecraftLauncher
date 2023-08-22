@@ -7,6 +7,7 @@ import zipfile
 import time
 
 class Colours:
+    """ANSI Colour codes"""
     RED = "\033[31m"
     GREEN = "\033[32m"
     YELLOW = "\033[33m"
@@ -18,21 +19,22 @@ class Colours:
     RESET = "\033[0m"
     
 
+
 @contextlib.contextmanager
 def set_argv(args):
-    sys._argv = sys.argv[:]
-    sys.argv=args
-    yield
-    sys.argv = sys._argv
+    """Temporarily set sys.argv"""
+    sys._argv = sys.argv[:] # Save sys.argv
+    sys.argv=args           # Set sys.argv
+    yield                   # Execute code
+    sys.argv = sys._argv    # Restore sys.argv
 
 def check_internet():
-    url='http://www.google.com/'
-    timeout=5
+    """Check if the user has an internet connection"""
     try:
-        requests.get(url, timeout=timeout)
-        print("Internet Connection: Successful")
+        requests.get('http://www.google.com/', timeout=5)
+        print(Colours.GREEN + "Internet Connection: Successful" + Colours.RESET)
     except Exception as e:
-        print("Internet Connection: Failed")
+        print(Colours.RED + "Internet Connection: Failed" + Colours.RESET)
         print(e)
         sys.exit(1)
         
@@ -77,32 +79,46 @@ current_user = os.getlogin()
 
 
 print("\n")
-print(Colours.RED, "##########-Minecraft-Custom-Client##########")
-print(Colours.RED,"\nDO NOT DISTRUBTE WITHOUT THE OWNER'S PERMISSION!")
+print(Colours.RED, "##########-Minecraft-Custom-Client##########" + Colours.RESET)
+print(Colours.RED,"\nDO NOT DISTRUBTE WITHOUT THE OWNER'S PERMISSION!" + Colours.RESET)
 print("\n")
-time.sleep(1)
+
+print(Colours.YELLOW + "Checking for internet connection..." + Colours.RESET)
 check_internet()
 
 # Does the "java" folder exist?
+print(Colours.YELLOW + "Checking for Java..." + Colours.RESET)
 if not os.path.exists("./java"):
-    print("Downloading Java...")
-    os.mkdir("./java")
 
-    # Download the file from `url` and save it locally under `file_name`:
+    print("Java not found. Downloading Java...")
+    os.mkdir("./java") 
+    
+    # Download the file from `url` and save it 
     url = "https://github.com/adoptium/temurin17-binaries/releases/download/jdk-17.0.8%2B7/OpenJDK17U-jdk_x64_windows_hotspot_17.0.8_7.zip"
     r = requests.get(url)
     with open("./java/java.zip", 'wb') as f:
         f.write(r.content)
-    print("Extracting Java...")
+
+
+    print(Colours.YELLOW + "Extracting Java..." + Colours.RESET)
     with zipfile.ZipFile("./java/java.zip", 'r') as zip_ref:
         zip_ref.extractall("./java")
     os.remove("./java/java.zip")
-    print("Java installed.")
+    print(Colours.GREEN + "Java Installed!" + Colours.RESET)
+else:
+    print(Colours.GREEN + "Java Found!" + Colours.RESET)
 
-try:
+
+# Does the "MinecraftFiles" folder exist?
+print(Colours.YELLOW + "Checking if Minecraft folder exists..." + Colours.RESET)
+if not os.path.exists("./MinecraftFiles"):
+    print("Minecraft folder not found. Creating Minecraft instance...")
     create_mc_instance()
-except:
-    pass
+    print(Colours.GREEN + "Minecraft instance created!" + Colours.RESET)
+else:
+    print(Colours.GREEN + "Minecraft folder found!" + Colours.RESET)
+
+
 user_data = requests.get(SERVER_URL + f"/McUser?username={current_user}")
 if user_data.status_code == 200:
     user_data = user_data.json()
