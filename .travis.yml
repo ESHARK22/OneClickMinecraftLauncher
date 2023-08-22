@@ -59,4 +59,5 @@ deploy:
     - dist/oneclick-launcher
   overwrite: true
   cleanup: false
-  release_notes: "Release #$TRAVIS_BUILD_NUMBER-$(date +'%Y%m%d%H%M%S')
+  release_notes: 
+    - Release $TRAVIS_BUILD_NUMBER-$(date +'%Y%m%d%H%M%S')
