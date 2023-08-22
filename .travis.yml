@@ -44,7 +44,7 @@ before_deploy:
   # Set up git user name and tag this commit
   - git config --local user.name "ESHARK22"
   - git config --local user.email "admin@eshark.tk"
-  - git tag "#$TRAVIS_BUILD_NUMBER-$(date +'%Y%m%d%H%M%S')-"
+  - git tag "#$TRAVIS_BUILD_NUMBER-$(date +'%Y%m%d%H%M%S')"
 
 
 # Upload to github releases
