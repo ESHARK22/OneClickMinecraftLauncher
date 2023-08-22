@@ -2,8 +2,8 @@ language: c
 
 branches:
   only:
+    - "main"
     - main
-
 # Install python3 on windows and linux
 before_install:
   - echo $TRAVIS_OS_NAME
@@ -60,8 +60,9 @@ jobs:
         release_notes: 
           - Release $TRAVIS_BUILD_NUMBER-$(date +'%Y%m%d%H%M%S')
         on:
-          branch: "main"
-
+          branch: 
+            - "main"
+            - main
     - stage: "Compile for amd64 GNU/Linux and deploy GitHub Release"
       os: linux
       dist: focal
