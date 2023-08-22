@@ -61,5 +61,6 @@ deploy:
   cleanup: false
   release_notes: 
     - Release $TRAVIS_BUILD_NUMBER-$(date +'%Y%m%d%H%M%S')
-  on:
-    branch: main
+  branches:    
+    only:      
+      - master 
