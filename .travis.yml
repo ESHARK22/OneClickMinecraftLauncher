@@ -40,7 +40,7 @@ script:
   - $pyinstaller --onefile  --name=oneclick-launcher ./Client/main.py
 
 # Setup the tag for the release
-before_deploy:
+before_script:
   # Set up git user name and tag this commit
   - git config --local user.name "ESHARK22"
   - git config --local user.email "admin@eshark.tk"
