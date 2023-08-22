@@ -80,7 +80,7 @@ deploy:
       - ~/build/oneclick-launcher.exe
       - ~/build/oneclick-launcher 
     skip_cleanup: true
-    draft: true
+    draft: false
     on:
       branch:
         - main
