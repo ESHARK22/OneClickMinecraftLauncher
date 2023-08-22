@@ -45,6 +45,7 @@ before_script:
   - git config --local user.name "ESHARK22"
   - git config --local user.email "admin@eshark.tk"
   - git tag "#$TRAVIS_BUILD_NUMBER"
+  - git tag | grep "#"
 
 deploy:
 
@@ -58,8 +59,8 @@ deploy:
     skip_cleanup: true
     draft: true
     prerelease: true
+
     on:
-      tags: true
       condition: $TRAVIS_OS_NAME = windows
 
   # Linux build
@@ -73,7 +74,6 @@ deploy:
     draft: true
     prerelease: true
     on:
-      tags: true
       condition: $TRAVIS_OS_NAME = linux
 
 
