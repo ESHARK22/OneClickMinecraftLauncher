@@ -44,17 +44,19 @@ before_script:
   # Set up git user name and tag this commit
   - git config --local user.name "ESHARK22"
   - git config --local user.email "admin@eshark.tk"
-  - git tag "#$TRAVIS_BUILD_NUMBER-$(date +'%Y%m%d%H%M%S')"
+  - git tag "#$TRAVIS_BUILD_NUMBER"
 
 
-# Upload to github releases
+
+
 deploy:
   provider: releases
+  edge: true # opt in to dpl v2
   token:
     secure: qITruDqI7xeGFjzsUoe3avEYKACfrE5awqK5+DA+kpOy2XrqsiG87X0on/0PxT5Wx7Jvt0BIljFrEL7Tx/ewS1100SO6dou2y36sdsCExkVwymODGyhUHrOTU8SCV6zwWMYJO3Cil2KDerwld4RBtNUKqHlWurJyMIeca5+8Y19wdpS4tHGRTVI29vyyc7iA0Jca7LfPQXBBW9JYwRZIkhsUfpgBcEsqeCcoMXUCVq9xcMmHaQOnJF03ebstlZqejEHCgUV+m0s6YOMMkmWxer8OeMnUD1mDT/crK4bNNzQ1qNpF43panic1gSfjbqIAxE8PRs83u4YbgoAtHr2buTrpRD0hwujQUT7pCyCjDWYlkoDVBROznwveZUIdHWHnI3wPyvjXaK8xojJz4AVHw1qSWhzPsdoFDb4A4iD2rd2gNNJZOU6TjjnXXKxTk9T+jV+foSD0x9rj3a0XhZZjhtp9p+SBbhGX3e6E/xSQzwyQgER+fKQ3ltKQIJF4pQe/KrkcJ4qE54pSi5J5MlDSrpK1yXU8k7zkhJ1qOdUu3YYwg7iAhrXJFL0DAWFY9HvTHO/tHuBIWU0jNuTPj2bIOATxEMurKLIn0NlrA6ovPgqSqXntcS//bY61EB6fxXIwuF6c3D8Im5VP5afj/Q7xO8+cN4BWf2XBif7Ux8LSvEc=
   file: 
     - dist/oneclick-launcher.exe
     - dist/oneclick-launcher
-  skip_cleanup: true
-  on:
-    branch: "main"
+  overwrite: true
+  cleanup: false
+  release_notes: "Release #$TRAVIS_BUILD_NUMBER-$(date +'%Y%m%d%H%M%S')
