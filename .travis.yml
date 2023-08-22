@@ -38,7 +38,8 @@ install:
 
 # Use pyinstaller to build the executable
 script:
-  - $pyinstaller --onefile  --name=oneclick-launcher ./Client/main.py --distpath=~/build
+  - $pyinstaller --onefile  --name=oneclick-launcher ./Client/main.py
+  - cp dist/* ~/build
   - ls ~/build
 
 # Setup the tag for the release
