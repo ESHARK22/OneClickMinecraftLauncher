@@ -31,8 +31,7 @@ before_install:
           export pyinstaller="/home/travis/.local/bin/pyinstaller"
 
           # Empty the ~/out directory
-          rm -rf ~/out/
-          mkdir ~/out/
+          rm -rf ~/out/*
           ;;
       esac
 
