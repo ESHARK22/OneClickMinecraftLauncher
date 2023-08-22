@@ -4,6 +4,19 @@ import requests
 import os
 import json
 import zipfile
+import time
+
+class Colours:
+    RED = "\033[31m"
+    GREEN = "\033[32m"
+    YELLOW = "\033[33m"
+    BLUE = "\033[34m"
+    PURPLE = "\033[35m"
+
+    BOLD = "\033[1m"
+    UNDERLINE = "\033[4m"
+    RESET = "\033[0m"
+    
 
 @contextlib.contextmanager
 def set_argv(args):
@@ -16,10 +29,10 @@ def check_internet():
     url='http://www.google.com/'
     timeout=5
     try:
-        _ = requests.get(url, timeout=timeout)
-        print("Internet connection is working")
+        requests.get(url, timeout=timeout)
+        print("Internet Connection: Successful")
     except Exception as e:
-        print("No internet connection.")
+        print("Internet Connection: Failed")
         print(e)
         sys.exit(1)
 
@@ -58,6 +71,13 @@ def write_account_config(username, uuid, client_token):
 SERVER_URL = "https://testmc.eshark.tk/"
 java_path = os.path.abspath("./java/jdk-17.0.8+7/bin/java.exe")
 current_user = os.getlogin()
+
+
+print("\n")
+print(Colours.RED, "##########-Minecraft-Custom-Client##########")
+print(Colours.RED,"\nDO NOT DISTRUBTE WITHOUT THE OWNER'S PERMISSION!")
+print("\n")
+time.sleep(1)
 check_internet()
 
 # Does the "java" folder exist?
