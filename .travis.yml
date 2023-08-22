@@ -22,7 +22,7 @@ before_install:
           sudo apt install python3 curl
           export python="python3"
           export python_path = $(which python3)
-          export pyinstaller="$pyhton_path/Scripts/pyinstaller.exe"
+          export pyinstaller="/home/travis/.local/bin/pyinstaller"
           ;;
       esac
 
