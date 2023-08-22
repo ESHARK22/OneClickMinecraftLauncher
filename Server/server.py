@@ -1,6 +1,6 @@
 import json
 import flask
-
+import uuid
 app = flask.Flask(__name__)
 
 
@@ -17,8 +17,8 @@ def McUser():
 @app.route('/McUser', methods=['POST'])
 def McUserPost():
     username = flask.request.args.get('username')
-    uuid = flask.request.args.get('MinecraftUUID')
-    client_token = flask.request.args.get('MinecraftClientToken')
+    uuid = uuid.uuid4()
+    client_token = uuid.uuid4()
     can_play_mc = flask.request.args.get('CanPlayMC')
     try:
         mc_username = flask.request.args.get('MinecraftUsername')
